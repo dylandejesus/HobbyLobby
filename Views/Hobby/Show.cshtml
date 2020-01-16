@@ -1,0 +1,24 @@
+@model Hobby
+
+<h1>@Model.HobbyName</h1>
+<a asp-action="LogOut" asp-controller="Home" class="btn btn-danger">LogOut</a>
+<a asp-action="Dashboard" asp-controller="Hobby">Home</a>
+
+
+<h4>Description: </h4>
+<h6>@Model.Description</h6>
+
+<h4>@Model.HobbyName: Enthusiasts </h4>
+@foreach(var e in @Model.Enthusiasts)
+{
+    <ul>
+        <li>@e.Fan.FirstName</li>
+    </ul>
+}
+
+<h5>Become an Enthusiasts!! </h5>
+@if(Model.Enthusiasts.All(s => s.UserID == @ViewBag.User.UserID))
+{
+ <a asp-action="AddHobby" asp-controller="Hobby" asp-route-hobbyId="@Model.HobbyId" asp-route-userId="@ViewBag.User.UserID" asp-route-status="add">Add to hobbies</a>
+}
+
